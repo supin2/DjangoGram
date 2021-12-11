@@ -3,7 +3,7 @@ from django.db.models.fields import related
 from djangogram.users import models as user_model
 
 # Create your models here.
-class TimeStamedModel(models.model):
+class TimeStamedModel(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now_add=True)
 
@@ -21,7 +21,7 @@ class Post(TimeStamedModel):
     ) 
     image = models.ImageField(blank=True)
     caption = models.TextField(blank=True)
-    image_likes = models.ManyToManyField(user_model.User, realted_name='post_image_likes')
+    image_likes = models.ManyToManyField(user_model.User, related_name='post_image_likes')
 
 # 댓글 관리
 class Comment(TimeStamedModel):
@@ -29,7 +29,7 @@ class Comment(TimeStamedModel):
         user_model.User,  # User 모델의 User Table을 가리킴(외래키)
         null=True, 
         on_delete=models.CASCADE, 
-        related_name='post_author'
+        related_name='comment_author'
     )
     posts = models.ForeignKey(
         Post,  # 위의 Post를 가리킴(외래키)
