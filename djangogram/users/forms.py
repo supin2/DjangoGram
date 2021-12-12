@@ -25,15 +25,18 @@ class SignUpForm(django_forms.ModelForm):
         model = User
         fields = ['email', 'name', 'username', 'password']
 
-        labels = {
-            'email' : '이메일 주소',
-            'name' : '성명',
-            'username' : '사용자 이름',
-            'password' : '비밀번호'
-        }
+        # labels = {
+        #     'email' : '이메일 주소',
+        #     'name' : '성명',
+        #     'username' : '사용자 이름',
+        #     'password' : '비밀번호'
+        # }
 
         widgets = {
-            'password' : django_forms.PasswordInput(), # 비밀번호 입력 시 안보이게 처리
+            'email' : django_forms.TextInput(attrs={'placeholder' : '이메일 주소' }),
+            'name' : django_forms.TextInput(attrs={'placeholder' : '성명' }),
+            'username' : django_forms.TextInput(attrs={'placeholder' : '사용자 이름' }),
+            'password' : django_forms.PasswordInput(attrs={'placeholder' : '비밀번호' }), # 비밀번호 입력 시 안보이게 처리
         }
 
     def save(self, commit=True):

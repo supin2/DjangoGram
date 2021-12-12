@@ -1,8 +1,28 @@
-Here is main.html
+{% extends "users/base.html" %}
 
-<form action="{% url 'users:main' %}" method='post'>
+{% block title %}
+Log in
+{% endblock title %}
+
+{% block content %}
+<!-- <form action="{% url 'users:main' %}" method='post'>
     {% csrf_token %}
     <input type="input" name="username" placeholder="username">
     <input type="password" name="password" placeholder="password">
     <input type="submit" value="Login">
-</form>
+</form> -->
+<h1>로그인</h1>
+<div class="auth">
+    <form action="{% url 'users:main' %}" method='post'>
+        {% csrf_token %}
+        <input type="input" name="username" placeholder="username">
+        <input type="password" name="password" placeholder="password">
+        <input type="submit" value="Login">
+    </form>
+</div>
+
+<div class="auth_link">
+    <a href="{% url 'users:signup' %}">Sign up</a>
+</div>
+
+{% endblock content %}

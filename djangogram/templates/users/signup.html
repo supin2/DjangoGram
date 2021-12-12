@@ -1,6 +1,12 @@
-<h1>Here is SignUp page</h1>
+{% extends "users/base.html" %}
 
-<form action="{% url 'users:signup' %}" method="post">
+{% block title %}
+Sign up
+{% endblock title %}
+
+
+{% block content %}
+<!-- <form action="{% url 'users:signup' %}" method="post">
     {% csrf_token %}
     {% for field in form %}
     <div class="fieldWrapper">
@@ -9,6 +15,22 @@
     </div>
     {% endfor %}
     <input type="submit" value="Sign up">
-</form>
+</form> -->
+<h1>회원가입</h1>
+<div class="auth">
+    <form action="{% url 'users:signup' %}" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {{ field }}
+        </div>
+        {% endfor %}
+        <input type="submit" value="Sign up">
+    </form>
+</div>
 
-<a href="{% url 'users:main' %}">Login</a>
+<div class="auth_link">
+    <a href="{% url 'users:main' %}">Login</a>
+</div>
+{% endblock content %}
