@@ -10,6 +10,9 @@ urlpatterns = [
     # /posts/create/
     path('create/', views.post_create, name='post_create'),
 
+    # /posts/1/delete/
+    path('<int:post_id>/delete', views.post_delete, name='post_delete'),
+
     # /posts/3/update/
     path('<int:post_id>/update', views.post_update, name='post_update'),
 

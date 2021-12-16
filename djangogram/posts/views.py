@@ -57,6 +57,23 @@ def post_create(request):
         else:
             return render(request, 'users/main.html')
 
+def post_delete(request, post_id):
+    if request.user.is_authenticated:
+        post = get_object_or_404(models.Post, pk=post_id)
+        if request.user != post.author:
+            return redirect(reverse('posts:index'))
+
+        if request.method == 'GET':
+            return render(request, 'posts/post_confirm_delete.html')
+            
+        elif request.method == 'POST':
+            post.delete()
+            return redirect(reverse('posts:index'))
+        
+    else:
+        return render(request, 'users/main.html')
+
+
 def post_update(request, post_id):
     if request.user.is_authenticated:
         # 작성자 체크

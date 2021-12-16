@@ -24,7 +24,9 @@
                     <a href="{% url 'posts:post_update' post.id %}">
                         <i class="fa fa-pencil fa1x"></i>
                     </a>
-                    <i class="fa fa-trash-o fa1x"></i>
+                    <a href="{% url 'posts:post_delete' post.id %}">
+                        <i class="fa fa-trash-o fa1x"></i>
+                    </a>
                 </div>
             {% endif %}
         </div>

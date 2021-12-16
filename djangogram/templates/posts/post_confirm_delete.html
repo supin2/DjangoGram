@@ -1,0 +1,17 @@
+{% extends "posts/base.html" %}
+
+{% block content %}
+
+<div class="post-delete">
+    <div class="form">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div>
+                정말 삭제하시겠습니까?
+            </div>
+            <input type="submit" value="Confirm">
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
