@@ -16,7 +16,7 @@ def index(request):
             following = user.following.all()
             posts = models.Post.objects.filter(
                 Q(author__in=following) | Q(author=user)
-            )
+            ).order_by("-create_at")
 
             serializer = serializers.PostSerializer(posts, many=True) # 피드에 보여지는 포스트가 여러개일 수도 있으니 many=True 옵션 추가
             # print(serializer.data)
@@ -71,7 +71,12 @@ def post_update(request, post_id):
 
         elif request.method == 'POST':
             # 업데이트 버튼 클릭 후 저장을 위한 POST API 요청 로직
-            pass
+            form = UpdatePostForm(request.POST)
+            if form.is_valid():
+                post.caption = form.cleaned_data['caption']
+                post.save()
+            
+            return redirect(reverse('posts:index'))
 
     else:
         return render(request, 'users/main.html')
